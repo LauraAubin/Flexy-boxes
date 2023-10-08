@@ -7,7 +7,7 @@ export default function App() {
   const [color] = useState('teal');
 
   return (
-    <AppProvider>
+    <AppProvider i18n={[]}>
       <Page title="This is made using Create React App">
         <LegacyCard title="This is a card thanks to Polaris ⭐️">
           <LegacyCard.Section>
