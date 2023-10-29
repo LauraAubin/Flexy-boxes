@@ -22,13 +22,23 @@ enum Display {
   Flex = 'flex',
 }
 
+enum Width {
+  Auto = 'auto',
+  FitContent = 'fit-content',
+  Max = '100%',
+}
+
+const MIN_WIDTH_FIELD = '120px';
+
 export default function App() {
+  const [boxWidth, setBoxWidth] = useState(Width.Auto);
   const [boxDisplayProperty, setBoxDisplayProperty] = useState(Display.Block);
 
-  const [boxCount, setBoxCount] = useState('2');
   const [containerDisplayProperty, containerBoxDisplayProperty] = useState(
     Display.Block
   );
+  const [boxCount, setBoxCount] = useState('1');
+  const [wrap, setWrap] = useState(false);
 
   const handleBoxCountChange = (value: string) => {
     setBoxCount(value);
@@ -42,6 +52,14 @@ export default function App() {
     setBoxDisplayProperty(value);
   };
 
+  const handleBoxWidthChange = (value: Width) => {
+    setBoxWidth(value);
+  };
+
+  const handleWrap = (value: boolean) => {
+    setWrap(value);
+  };
+
   function RenderBoxes() {
     const renderBoxes = () => {
       const boxes = [];
@@ -50,7 +68,7 @@ export default function App() {
         boxes.push(
           <div
             className="Box"
-            style={{display: boxDisplayProperty, width: 'fit-content'}}
+            style={{display: boxDisplayProperty, width: boxWidth}}
           >
             Box {i + 1}
           </div>
@@ -62,7 +80,14 @@ export default function App() {
     return (
       <Layout.Section oneThird>
         <Card padding="300">
-          <div style={{display: containerDisplayProperty}}>{renderBoxes()}</div>
+          <div
+            style={{
+              display: containerDisplayProperty,
+              flexWrap: `${wrap ? 'wrap' : 'nowrap'}`,
+            }}
+          >
+            {renderBoxes()}
+          </div>
         </Card>
       </Layout.Section>
     );
@@ -82,15 +107,26 @@ export default function App() {
                     Box properties
                   </Text>
 
-                  <Box width="100%">
-                    <Select
-                      label="Display"
-                      value={boxDisplayProperty}
-                      onChange={handleBoxDisplayChange}
-                      options={[Display.Inline, Display.Block, Display.Flex]}
-                      helpText="Default: block"
-                    />
-                  </Box>
+                  <HorizontalStack gap="4" wrap={false}>
+                    <Box minWidth={MIN_WIDTH_FIELD}>
+                      <Select
+                        label="Width"
+                        value={boxWidth}
+                        onChange={handleBoxWidthChange}
+                        options={[Width.Auto, Width.FitContent, Width.Max]}
+                      />
+                    </Box>
+
+                    <Box width="100%">
+                      <Select
+                        label="Display"
+                        value={boxDisplayProperty}
+                        onChange={handleBoxDisplayChange}
+                        options={[Display.Inline, Display.Block, Display.Flex]}
+                        helpText="Default: block"
+                      />
+                    </Box>
+                  </HorizontalStack>
                 </VerticalStack>
               </Card>
 
@@ -99,9 +135,8 @@ export default function App() {
                   <Text as="h2" variant="headingMd">
                     Container properties
                   </Text>
-
                   <HorizontalStack gap="4" wrap={false}>
-                    <Box maxWidth="150px">
+                    <Box minWidth={MIN_WIDTH_FIELD}>
                       <TextField
                         label="Box count"
                         value={boxCount}
@@ -122,6 +157,12 @@ export default function App() {
                       />
                     </Box>
                   </HorizontalStack>
+
+                  <Checkbox
+                    label="Allow flex wrapping"
+                    checked={wrap}
+                    onChange={handleWrap}
+                  />
                 </VerticalStack>
               </Card>
             </VerticalStack>
