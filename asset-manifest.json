@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/flexy-boxes/static/css/main.ec64b187.css",
+    "main.js": "/flexy-boxes/static/js/main.e353505e.js",
+    "index.html": "/flexy-boxes/index.html",
+    "main.ec64b187.css.map": "/flexy-boxes/static/css/main.ec64b187.css.map",
+    "main.e353505e.js.map": "/flexy-boxes/static/js/main.e353505e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ec64b187.css",
+    "static/js/main.e353505e.js"
+  ]
+}
