@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Flexy-boxes/static/css/main.ec64b187.css",
-    "main.js": "/Flexy-boxes/static/js/main.37caf340.js",
+    "main.js": "/Flexy-boxes/static/js/main.a833fdd6.js",
     "index.html": "/Flexy-boxes/index.html",
     "main.ec64b187.css.map": "/Flexy-boxes/static/css/main.ec64b187.css.map",
-    "main.37caf340.js.map": "/Flexy-boxes/static/js/main.37caf340.js.map"
+    "main.a833fdd6.js.map": "/Flexy-boxes/static/js/main.a833fdd6.js.map"
   },
   "entrypoints": [
     "static/css/main.ec64b187.css",
-    "static/js/main.37caf340.js"
+    "static/js/main.a833fdd6.js"
   ]
 }
