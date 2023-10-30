@@ -1,7 +1,7 @@
 {
   "name": "flexy-boxes",
   "version": "0.1.0",
-  "homepage": "https://lauraaubin.github.io/flexy-boxes",
+  "homepage": "https://lauraaubin.github.io/Flexy-boxes",
   "private": true,
   "dependencies": {
     "@shopify/polaris": "^11.26.0",
