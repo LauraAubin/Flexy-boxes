@@ -4,8 +4,10 @@ import {
   Box,
   Card,
   Checkbox,
+  Divider,
   Layout,
   Page,
+  RangeSlider,
   Select,
   Text,
   TextField,
@@ -28,9 +30,27 @@ enum Width {
   Max = '100%',
 }
 
+enum JustifyContent {
+  FlexStart = 'flex-start',
+  FlexEnd = 'flex-end',
+  Center = 'center',
+  SpaceBetween = 'space-between',
+  SpaceAround = 'space-around',
+  SpaceEvenly = 'space-evenly',
+}
+
+enum AlignItems {
+  FlexStart = 'flex-start',
+  FlexEnd = 'flex-end',
+  Center = 'center',
+  Stretch = 'stretch',
+}
+
 const MIN_WIDTH_FIELD = '120px';
 
 export default function App() {
+  const [playgroundHeight, setPlaygroundHeight] = useState(200);
+
   const [boxWidth, setBoxWidth] = useState(Width.Auto);
   const [boxDisplayProperty, setBoxDisplayProperty] = useState(Display.Block);
 
@@ -39,25 +59,41 @@ export default function App() {
   );
   const [boxCount, setBoxCount] = useState('1');
   const [wrap, setWrap] = useState(false);
+  const [justifyContent, setJustifyContent] = useState(
+    JustifyContent.FlexStart
+  );
+  const [alignItems, setAlignItems] = useState(AlignItems.FlexStart);
 
-  const handleBoxCountChange = (value: string) => {
+  const handlePlaygroundHeight = (value: number) => {
+    setPlaygroundHeight(value);
+  };
+
+  const handleBoxCount = (value: string) => {
     setBoxCount(value);
   };
 
-  const handleContainerDisplayChange = (value: Display) => {
+  const handleContainerDisplay = (value: Display) => {
     containerBoxDisplayProperty(value);
   };
 
-  const handleBoxDisplayChange = (value: Display) => {
+  const handleBoxDisplay = (value: Display) => {
     setBoxDisplayProperty(value);
   };
 
-  const handleBoxWidthChange = (value: Width) => {
+  const handleBoxWidth = (value: Width) => {
     setBoxWidth(value);
   };
 
   const handleWrap = (value: boolean) => {
     setWrap(value);
+  };
+
+  const handleJustifyContent = (value: JustifyContent) => {
+    setJustifyContent(value);
+  };
+
+  const handleAlignItems = (value: AlignItems) => {
+    setAlignItems(value);
   };
 
   function RenderBoxes() {
@@ -80,16 +116,36 @@ export default function App() {
 
     return (
       <Layout.Section oneThird>
-        <Card padding="300">
-          <div
-            style={{
-              display: containerDisplayProperty,
-              flexWrap: `${wrap ? 'wrap' : 'nowrap'}`,
-            }}
-          >
-            {renderBoxes()}
-          </div>
-        </Card>
+        <VerticalStack gap="2">
+          <Card padding="0">
+            <div
+              style={{
+                display: containerDisplayProperty,
+                flexWrap: `${wrap ? 'wrap' : 'nowrap'}`,
+                justifyContent: justifyContent,
+                alignItems: alignItems,
+                height: playgroundHeight,
+                margin: '8px',
+                background: 'rgba(0, 128, 128, 0.1)',
+                borderRadius: '10px',
+              }}
+            >
+              {renderBoxes()}
+            </div>
+          </Card>
+          <Card background="bg-subdued" padding="300">
+            <RangeSlider
+              label="Playground height"
+              value={playgroundHeight}
+              onChange={handlePlaygroundHeight}
+              min={30}
+              max={500}
+              prefix={`${playgroundHeight}px`}
+              suffix="500px"
+              output
+            />
+          </Card>
+        </VerticalStack>
       </Layout.Section>
     );
   }
@@ -113,7 +169,7 @@ export default function App() {
                       <Select
                         label="Width"
                         value={boxWidth}
-                        onChange={handleBoxWidthChange}
+                        onChange={handleBoxWidth}
                         options={[Width.Auto, Width.FitContent, Width.Max]}
                       />
                     </Box>
@@ -122,7 +178,7 @@ export default function App() {
                       <Select
                         label="Display"
                         value={boxDisplayProperty}
-                        onChange={handleBoxDisplayChange}
+                        onChange={handleBoxDisplay}
                         options={[Display.Inline, Display.Block, Display.Flex]}
                         helpText="Default: block"
                       />
@@ -132,7 +188,7 @@ export default function App() {
               </Card>
 
               <Card>
-                <VerticalStack gap="4">
+                <VerticalStack gap="5">
                   <Text as="h2" variant="headingMd">
                     Container properties
                   </Text>
@@ -141,9 +197,10 @@ export default function App() {
                       <TextField
                         label="Box count"
                         value={boxCount}
-                        onChange={handleBoxCountChange}
+                        onChange={handleBoxCount}
                         autoComplete="off"
                         type="number"
+                        min="0"
                         selectTextOnFocus
                       />
                     </Box>
@@ -152,12 +209,48 @@ export default function App() {
                       <Select
                         label="Display"
                         value={containerDisplayProperty}
-                        onChange={handleContainerDisplayChange}
+                        onChange={handleContainerDisplay}
                         options={[Display.Inline, Display.Block, Display.Flex]}
                         helpText="Default: block"
                       />
                     </Box>
                   </HorizontalStack>
+
+                  <Divider />
+
+                  <HorizontalStack gap="4" wrap={false}>
+                    <Box width="100%">
+                      <Select
+                        label="Justify content (horizontal)"
+                        value={justifyContent}
+                        onChange={handleJustifyContent}
+                        options={[
+                          JustifyContent.FlexStart,
+                          JustifyContent.FlexEnd,
+                          JustifyContent.Center,
+                          JustifyContent.SpaceBetween,
+                          JustifyContent.SpaceAround,
+                          JustifyContent.SpaceEvenly,
+                        ]}
+                      />
+                    </Box>
+
+                    <Box width="100%">
+                      <Select
+                        label="Align items (vertical)"
+                        value={alignItems}
+                        onChange={handleAlignItems}
+                        options={[
+                          AlignItems.FlexStart,
+                          AlignItems.FlexEnd,
+                          AlignItems.Center,
+                          AlignItems.Stretch,
+                        ]}
+                      />
+                    </Box>
+                  </HorizontalStack>
+
+                  <Divider />
 
                   <Checkbox
                     label="Allow flex wrapping"
