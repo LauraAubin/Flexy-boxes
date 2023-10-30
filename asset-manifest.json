@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/flexy-boxes/static/css/main.ec64b187.css",
-    "main.js": "/flexy-boxes/static/js/main.0c556f31.js",
-    "index.html": "/flexy-boxes/index.html",
-    "main.ec64b187.css.map": "/flexy-boxes/static/css/main.ec64b187.css.map",
-    "main.0c556f31.js.map": "/flexy-boxes/static/js/main.0c556f31.js.map"
+    "main.css": "/Flexy-boxes/static/css/main.ec64b187.css",
+    "main.js": "/Flexy-boxes/static/js/main.0c556f31.js",
+    "index.html": "/Flexy-boxes/index.html",
+    "main.ec64b187.css.map": "/Flexy-boxes/static/css/main.ec64b187.css.map",
+    "main.0c556f31.js.map": "/Flexy-boxes/static/js/main.0c556f31.js.map"
   },
   "entrypoints": [
     "static/css/main.ec64b187.css",
