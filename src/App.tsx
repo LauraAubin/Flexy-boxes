@@ -67,6 +67,7 @@ export default function App() {
       for (let i = 0; i < Number(boxCount); i++) {
         boxes.push(
           <div
+            key={i}
             className="Box"
             style={{display: boxDisplayProperty, width: boxWidth}}
           >
