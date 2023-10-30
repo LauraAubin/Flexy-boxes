@@ -39,7 +39,7 @@ enum JustifyContent {
   SpaceEvenly = 'space-evenly',
 }
 
-enum AlignItems {
+enum AlignContent {
   FlexStart = 'flex-start',
   FlexEnd = 'flex-end',
   Center = 'center',
@@ -62,7 +62,7 @@ export default function App() {
   const [justifyContent, setJustifyContent] = useState(
     JustifyContent.FlexStart
   );
-  const [alignItems, setAlignItems] = useState(AlignItems.FlexStart);
+  const [alignContent, setAlignContent] = useState(AlignContent.FlexStart);
 
   const handlePlaygroundHeight = (value: number) => {
     setPlaygroundHeight(value);
@@ -92,8 +92,8 @@ export default function App() {
     setJustifyContent(value);
   };
 
-  const handleAlignItems = (value: AlignItems) => {
-    setAlignItems(value);
+  const handleAlignContent = (value: AlignContent) => {
+    setAlignContent(value);
   };
 
   function RenderBoxes() {
@@ -123,7 +123,7 @@ export default function App() {
                 display: containerDisplayProperty,
                 flexWrap: `${wrap ? 'wrap' : 'nowrap'}`,
                 justifyContent: justifyContent,
-                alignItems: alignItems,
+                alignContent: alignContent,
                 height: playgroundHeight,
                 margin: '8px',
                 background: 'rgba(0, 128, 128, 0.1)',
@@ -142,7 +142,6 @@ export default function App() {
               max={500}
               prefix={`${playgroundHeight}px`}
               suffix="500px"
-              output
             />
           </Card>
         </VerticalStack>
@@ -237,14 +236,14 @@ export default function App() {
 
                     <Box width="100%">
                       <Select
-                        label="Align items (vertical)"
-                        value={alignItems}
-                        onChange={handleAlignItems}
+                        label="Align content (vertical)"
+                        value={alignContent}
+                        onChange={handleAlignContent}
                         options={[
-                          AlignItems.FlexStart,
-                          AlignItems.FlexEnd,
-                          AlignItems.Center,
-                          AlignItems.Stretch,
+                          AlignContent.FlexStart,
+                          AlignContent.FlexEnd,
+                          AlignContent.Center,
+                          AlignContent.Stretch,
                         ]}
                       />
                     </Box>
